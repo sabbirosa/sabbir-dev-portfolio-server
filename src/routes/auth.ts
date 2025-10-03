@@ -1,4 +1,4 @@
-import { authController } from "@/controllers/AuthController";
+import { authController } from "@/controllers/AuthController.mongoose";
 import { authenticateToken } from "@/middleware/auth";
 import { asyncHandler } from "@/middleware/errorHandler";
 import { authRateLimiter } from "@/middleware/security";

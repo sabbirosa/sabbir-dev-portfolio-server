@@ -179,7 +179,9 @@ class Server {
    */
   private async seedInitialData(): Promise<void> {
     try {
-      await seedAdminUser();
+      // Import the mongoose seed functions
+      const { seedAll } = await import("@/scripts/seed.mongoose");
+      await seedAll();
       logger.info("🌱 Initial data seeded successfully");
     } catch (error) {
       logger.error("Initial data seeding failed", {

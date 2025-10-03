@@ -12,13 +12,14 @@ export interface EnvironmentConfig {
   ADMIN_EMAIL: string;
   ADMIN_PASSWORD: string;
   FRONTEND_URL: string;
+  MONGODB_URI: string;
   RATE_LIMIT_MAX: number;
   RATE_LIMIT_WINDOW_MS: number;
   LOG_LEVEL: string;
 }
 
 // Validate required environment variables
-const requiredEnvVars = ["JWT_SECRET", "ADMIN_EMAIL", "ADMIN_PASSWORD"];
+const requiredEnvVars = ["JWT_SECRET", "ADMIN_EMAIL", "ADMIN_PASSWORD", "MONGODB_URI"];
 
 const missingEnvVars = requiredEnvVars.filter((envVar) => !process.env[envVar]);
 
@@ -42,6 +43,7 @@ export const env: EnvironmentConfig = {
   ADMIN_EMAIL: process.env.ADMIN_EMAIL!,
   ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
   FRONTEND_URL: process.env.FRONTEND_URL || "http://localhost:3000",
+  MONGODB_URI: process.env.MONGODB_URI || "mongodb://localhost:27017/portfolio",
   RATE_LIMIT_MAX: parseInt(process.env.RATE_LIMIT_MAX || "100", 10),
   RATE_LIMIT_WINDOW_MS: parseInt(
     process.env.RATE_LIMIT_WINDOW_MS || "900000",

@@ -1,6 +1,6 @@
-// Database configuration
-// Currently using in-memory storage for demo
-// Can be extended to use Prisma, MongoDB, or other databases
+// Database configuration with MongoDB/Mongoose
+import mongoose from "mongoose";
+import { env } from "./environment";
 
 export interface DatabaseConfig {
   type: "memory" | "prisma" | "mongodb";
@@ -9,10 +9,11 @@ export interface DatabaseConfig {
 }
 
 export const databaseConfig: DatabaseConfig = {
-  type: "memory", // For demo purposes
-  // Future: Add database connection configurations
+  type: "mongodb",
+  connectionString: env.MONGODB_URI || "mongodb://localhost:27017/portfolio",
   options: {
-    // Add any database-specific options here
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
   },
 };
 
@@ -27,8 +28,29 @@ export const initializeDatabase = async (): Promise<void> => {
       console.log("🗄️  Initializing Prisma database connection");
       break;
     case "mongodb":
-      // Initialize MongoDB connection
-      console.log("🗄️  Initializing MongoDB connection");
+      if (!databaseConfig.connectionString) {
+        throw new Error("MongoDB connection string is not defined");
+      }
+      
+      try {
+        await mongoose.connect(databaseConfig.connectionString, {
+          ...databaseConfig.options,
+        });
+        console.log("🗄️  MongoDB connected successfully");
+      } catch (error) {
+        console.error("MongoDB connection error:", error);
+        throw error;
+      }
+      
+      // Handle connection events
+      mongoose.connection.on("error", (err) => {
+        console.error("MongoDB connection error:", err);
+      });
+
+      mongoose.connection.on("disconnected", () => {
+        console.log("🗄️  MongoDB disconnected");
+      });
+      
       break;
     default:
       throw new Error("Unknown database type");
@@ -36,6 +58,8 @@ export const initializeDatabase = async (): Promise<void> => {
 };
 
 export const closeDatabase = async (): Promise<void> => {
-  // Add cleanup logic for database connections
+  if (databaseConfig.type === "mongodb") {
+    await mongoose.connection.close();
+  }
   console.log("🗄️  Database connection closed");
 };

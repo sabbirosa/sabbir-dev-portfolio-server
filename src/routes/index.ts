@@ -3,6 +3,8 @@ import { logger } from "@/utils/logger";
 import { Router } from "express";
 import authRoutes from "./auth";
 import healthRoutes from "./health";
+import blogRoutes from "./blog";
+import projectRoutes from "./project";
 
 const router = Router();
 
@@ -14,6 +16,8 @@ const router = Router();
 // Mount route modules
 router.use("/auth", authRoutes);
 router.use("/health", healthRoutes);
+router.use("/blogs", blogRoutes);
+router.use("/projects", projectRoutes);
 
 // API root endpoint
 router.get("/", (req, res) => {
@@ -38,6 +42,20 @@ router.get("/", (req, res) => {
           general: "GET /api/health",
           readiness: "GET /api/health/ready",
           liveness: "GET /api/health/live",
+        },
+        blogs: {
+          getAll: "GET /api/blogs",
+          getById: "GET /api/blogs/:id",
+          create: "POST /api/blogs (protected)",
+          update: "PUT /api/blogs/:id (protected)",
+          delete: "DELETE /api/blogs/:id (protected)",
+        },
+        projects: {
+          getAll: "GET /api/projects",
+          getById: "GET /api/projects/:id",
+          create: "POST /api/projects (protected)",
+          update: "PUT /api/projects/:id (protected)",
+          delete: "DELETE /api/projects/:id (protected)",
         },
       },
       documentation: "https://github.com/sabbir-ahmed/portfolio-v2-server",

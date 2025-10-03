@@ -24,7 +24,9 @@ export class AuthController {
       logger.info("Login attempt", { email: loginData.email });
 
       // Find user and include password for comparison
-      const user = await UserModel.findOne({ email: loginData.email }).select("+password");
+      const user = await UserModel.findOne({ email: loginData.email }).select(
+        "+password"
+      );
 
       if (!user) {
         logger.warn("Login failed - user not found", {
@@ -35,7 +37,7 @@ export class AuthController {
 
       // Compare password
       const isPasswordValid = await user.comparePassword(loginData.password);
-      
+
       if (!isPasswordValid) {
         logger.warn("Login failed - invalid password", {
           email: loginData.email,
@@ -51,7 +53,7 @@ export class AuthController {
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       };
-      
+
       const token = JWTService.generateToken(tokenPayload);
 
       // Prepare response (without password)
@@ -243,4 +245,3 @@ export class AuthController {
 
 // Export singleton instance
 export const authController = new AuthController();
-

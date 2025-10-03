@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Document, Model, Schema } from "mongoose";
 
 // Project interface extending mongoose Document
 export interface IProject extends Document {
@@ -84,4 +84,3 @@ export const ProjectModel: Model<IProject> = mongoose.model<IProject>(
   "Project",
   projectSchema
 );
-

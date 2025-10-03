@@ -1,7 +1,7 @@
 import { env } from "@/config/environment";
-import { UserModel } from "@/models/User.mongoose";
 import { BlogModel } from "@/models/Blog";
 import { ProjectModel } from "@/models/Project";
+import { UserModel } from "@/models/User.mongoose";
 import { logger } from "@/utils/logger";
 
 /**
@@ -234,7 +234,14 @@ export const seedProjects = async (): Promise<void> => {
         liveLink: "https://bracucc.org",
         codeLink: "https://github.com/sabbirosa/bucc",
         year: "2024",
-        techStack: ["React", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT"],
+        techStack: [
+          "React",
+          "Tailwind CSS",
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "JWT",
+        ],
         challenges: [
           "Designing scalable role-based access across admin/member views",
           "RFID attendance integration and syncing with user profiles",
@@ -274,7 +281,14 @@ export const seedProjects = async (): Promise<void> => {
         liveLink: "https://cohabit-sabbirosa.netlify.app",
         codeLink: "https://github.com/sabbirosa/cohabit-client",
         year: "2025",
-        techStack: ["React", "Tailwind CSS", "Express", "MongoDB", "JWT", "OAuth"],
+        techStack: [
+          "React",
+          "Tailwind CSS",
+          "Express",
+          "MongoDB",
+          "JWT",
+          "OAuth",
+        ],
         challenges: [
           "Balancing data privacy with search/match precision",
           "Implementing mobile-first matched list with lazy loading",
@@ -294,7 +308,14 @@ export const seedProjects = async (): Promise<void> => {
         liveLink: "https://project-r-sabbirosa.netlify.app/",
         codeLink: "https://github.com/sabbirosa/project-r-client",
         year: "2025",
-        techStack: ["React", "Tailwind CSS", "Node.js", "Express", "MySQL", "JWT"],
+        techStack: [
+          "React",
+          "Tailwind CSS",
+          "Node.js",
+          "Express",
+          "MySQL",
+          "JWT",
+        ],
         challenges: [
           "Designing normalized schemas and efficient reporting queries",
           "Implementing secure role-specific dashboards",
@@ -350,4 +371,3 @@ export const seedAll = async (): Promise<void> => {
     throw error;
   }
 };
-

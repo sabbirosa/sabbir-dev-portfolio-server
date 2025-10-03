@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
 import { ProjectModel } from "@/models/Project";
 import { logger } from "@/utils/logger";
+import { Request, Response } from "express";
 
 /**
  * Project Controller
@@ -14,7 +14,7 @@ export class ProjectController {
   async getAllProjects(req: Request, res: Response): Promise<void> {
     try {
       const { featured } = req.query;
-      
+
       // Filter by featured status if specified
       const filter: any = {};
       if (featured !== undefined) {
@@ -192,4 +192,3 @@ export class ProjectController {
 }
 
 export const projectController = new ProjectController();
-

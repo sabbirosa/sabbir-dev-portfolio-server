@@ -2,8 +2,8 @@ import { ApiResponse } from "@/types";
 import { logger } from "@/utils/logger";
 import { Router } from "express";
 import authRoutes from "./auth";
-import healthRoutes from "./health";
 import blogRoutes from "./blog";
+import healthRoutes from "./health";
 import projectRoutes from "./project";
 
 const router = Router();

@@ -31,7 +31,7 @@ export const initializeDatabase = async (): Promise<void> => {
       if (!databaseConfig.connectionString) {
         throw new Error("MongoDB connection string is not defined");
       }
-      
+
       try {
         await mongoose.connect(databaseConfig.connectionString, {
           ...databaseConfig.options,
@@ -41,7 +41,7 @@ export const initializeDatabase = async (): Promise<void> => {
         console.error("MongoDB connection error:", error);
         throw error;
       }
-      
+
       // Handle connection events
       mongoose.connection.on("error", (err) => {
         console.error("MongoDB connection error:", err);
@@ -50,7 +50,7 @@ export const initializeDatabase = async (): Promise<void> => {
       mongoose.connection.on("disconnected", () => {
         console.log("🗄️  MongoDB disconnected");
       });
-      
+
       break;
     default:
       throw new Error("Unknown database type");

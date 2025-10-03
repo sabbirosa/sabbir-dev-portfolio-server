@@ -19,7 +19,12 @@ export interface EnvironmentConfig {
 }
 
 // Validate required environment variables
-const requiredEnvVars = ["JWT_SECRET", "ADMIN_EMAIL", "ADMIN_PASSWORD", "MONGODB_URI"];
+const requiredEnvVars = [
+  "JWT_SECRET",
+  "ADMIN_EMAIL",
+  "ADMIN_PASSWORD",
+  "MONGODB_URI",
+];
 
 const missingEnvVars = requiredEnvVars.filter((envVar) => !process.env[envVar]);
 

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Document, Model, Schema } from "mongoose";
 
 // Blog interface extending mongoose Document
 export interface IBlog extends Document {
@@ -60,5 +60,7 @@ blogSchema.index({ date: -1 });
 blogSchema.index({ published: 1 });
 
 // Create and export the model
-export const BlogModel: Model<IBlog> = mongoose.model<IBlog>("Blog", blogSchema);
-
+export const BlogModel: Model<IBlog> = mongoose.model<IBlog>(
+  "Blog",
+  blogSchema
+);

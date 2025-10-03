@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
 import { BlogModel } from "@/models/Blog";
 import { logger } from "@/utils/logger";
+import { Request, Response } from "express";
 
 /**
  * Blog Controller
@@ -14,7 +14,7 @@ export class BlogController {
   async getAllBlogs(req: Request, res: Response): Promise<void> {
     try {
       const { published } = req.query;
-      
+
       // Filter by published status if specified
       const filter: any = {};
       if (published !== undefined) {
@@ -184,4 +184,3 @@ export class BlogController {
 }
 
 export const blogController = new BlogController();
-

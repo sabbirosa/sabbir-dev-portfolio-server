@@ -8,7 +8,6 @@ import {
   securityHeaders,
 } from "@/middleware/security";
 import routes from "@/routes";
-import { seedAdminUser } from "@/scripts/seed";
 import { logger } from "@/utils/logger";
 import compression from "compression";
 import cors from "cors";

@@ -1,5 +1,5 @@
 import { projectController } from "@/controllers/ProjectController";
-import { authenticate } from "@/middleware/auth";
+import { authenticateToken, requireAdmin } from "@/middleware/auth";
 import { Router } from "express";
 
 const router = Router();
@@ -11,17 +11,20 @@ router.get("/:id", projectController.getProjectById.bind(projectController));
 // Protected routes (admin only)
 router.post(
   "/",
-  authenticate,
+  authenticateToken,
+  requireAdmin,
   projectController.createProject.bind(projectController)
 );
 router.put(
   "/:id",
-  authenticate,
+  authenticateToken,
+  requireAdmin,
   projectController.updateProject.bind(projectController)
 );
 router.delete(
   "/:id",
-  authenticate,
+  authenticateToken,
+  requireAdmin,
   projectController.deleteProject.bind(projectController)
 );
 

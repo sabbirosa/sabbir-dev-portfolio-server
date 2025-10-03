@@ -1,5 +1,5 @@
 import { blogController } from "@/controllers/BlogController";
-import { authenticate } from "@/middleware/auth";
+import { authenticateToken, requireAdmin } from "@/middleware/auth";
 import { Router } from "express";
 
 const router = Router();
@@ -9,15 +9,22 @@ router.get("/", blogController.getAllBlogs.bind(blogController));
 router.get("/:id", blogController.getBlogById.bind(blogController));
 
 // Protected routes (admin only)
-router.post("/", authenticate, blogController.createBlog.bind(blogController));
+router.post(
+  "/",
+  authenticateToken,
+  requireAdmin,
+  blogController.createBlog.bind(blogController)
+);
 router.put(
   "/:id",
-  authenticate,
+  authenticateToken,
+  requireAdmin,
   blogController.updateBlog.bind(blogController)
 );
 router.delete(
   "/:id",
-  authenticate,
+  authenticateToken,
+  requireAdmin,
   blogController.deleteBlog.bind(blogController)
 );
 

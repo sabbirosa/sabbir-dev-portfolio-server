@@ -114,6 +114,7 @@ This project is configured for easy deployment to Vercel serverless functions.
 For detailed deployment instructions, see [VERCEL_DEPLOYMENT.md](./docs/VERCEL_DEPLOYMENT.md).
 
 **Key Features for Serverless:**
+
 - ✅ Database connection caching
 - ✅ Lazy initialization for fast cold starts
 - ✅ Optimized middleware configuration

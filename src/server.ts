@@ -221,7 +221,9 @@ class Server {
       const server = this.app.listen(this.port, this.host, () => {
         logger.info(`🚀 Server running on http://${this.host}:${this.port}`);
         logger.info(`📋 Environment: ${env.NODE_ENV}`);
-        logger.info(`📋 API Health: http://${this.host}:${this.port}/api/health`);
+        logger.info(
+          `📋 API Health: http://${this.host}:${this.port}/api/health`
+        );
         logger.info(`🔐 Admin Email: ${env.ADMIN_EMAIL}`);
 
         if (isDevelopment) {

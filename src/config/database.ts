@@ -14,8 +14,13 @@ export const databaseConfig: DatabaseConfig = {
   options: {
     serverSelectionTimeoutMS: 5000,
     socketTimeoutMS: 45000,
+    maxPoolSize: 10,
+    minPoolSize: 2,
   },
 };
+
+// Cache the connection promise for serverless environments
+let cachedConnection: Promise<typeof mongoose> | null = null;
 
 // Initialize database connection
 export const initializeDatabase = async (): Promise<void> => {
@@ -32,13 +37,32 @@ export const initializeDatabase = async (): Promise<void> => {
         throw new Error("MongoDB connection string is not defined");
       }
 
+      // Check if already connected (for serverless reuse)
+      if (mongoose.connection.readyState === 1) {
+        console.log("🗄️  Using existing MongoDB connection");
+        return;
+      }
+
+      // Check if connection is in progress
+      if (mongoose.connection.readyState === 2) {
+        console.log("🗄️  MongoDB connection in progress, waiting...");
+        await mongoose.connection.asPromise();
+        return;
+      }
+
       try {
-        await mongoose.connect(databaseConfig.connectionString, {
-          ...databaseConfig.options,
-        });
+        // Use cached connection promise or create new one
+        if (!cachedConnection) {
+          cachedConnection = mongoose.connect(databaseConfig.connectionString, {
+            ...databaseConfig.options,
+          });
+        }
+
+        await cachedConnection;
         console.log("🗄️  MongoDB connected successfully");
       } catch (error) {
         console.error("MongoDB connection error:", error);
+        cachedConnection = null; // Reset cache on error
         throw error;
       }
 
@@ -49,6 +73,7 @@ export const initializeDatabase = async (): Promise<void> => {
 
       mongoose.connection.on("disconnected", () => {
         console.log("🗄️  MongoDB disconnected");
+        cachedConnection = null; // Reset cache on disconnect
       });
 
       break;

@@ -21,43 +21,54 @@ class Server {
   private app: express.Application;
   private port: number;
   private host: string;
+  private isInitialized: boolean = false;
+  private initializationPromise: Promise<void> | null = null;
 
   constructor() {
     this.app = express();
     this.port = env.PORT;
     this.host = env.HOST;
 
-    this.initializeServer();
+    // Configure middleware and routes immediately (synchronous)
+    this.configureMiddleware();
+    this.configureRoutes();
+    this.configureErrorHandling();
   }
 
   /**
-   * Initialize server configuration
+   * Initialize server asynchronously (database, seeding, etc.)
    */
-  private async initializeServer(): Promise<void> {
-    try {
-      // Initialize database
-      await this.initializeDatabase();
-
-      // Configure middleware
-      this.configureMiddleware();
-
-      // Configure routes
-      this.configureRoutes();
-
-      // Configure error handling
-      this.configureErrorHandling();
-
-      // Seed initial data
-      await this.seedInitialData();
-
-      // Start server
-      this.startServer();
-    } catch (error) {
-      logger.error("Failed to initialize server", {
-        error: (error as Error).message,
-      });
-      process.exit(1);
+  private async initialize(): Promise<void> {
+    if (this.isInitialized) {
+      return;
     }
+
+    // Prevent multiple initializations
+    if (this.initializationPromise) {
+      return this.initializationPromise;
+    }
+
+    this.initializationPromise = (async () => {
+      try {
+        // Initialize database
+        await this.initializeDatabase();
+
+        // Seed initial data only in development or first run
+        if (isDevelopment) {
+          await this.seedInitialData();
+        }
+
+        this.isInitialized = true;
+        logger.info("✅ Server initialized successfully");
+      } catch (error) {
+        logger.error("Failed to initialize server", {
+          error: (error as Error).message,
+        });
+        throw error;
+      }
+    })();
+
+    return this.initializationPromise;
   }
 
   /**
@@ -154,7 +165,16 @@ class Server {
       });
     });
 
-    // API routes
+    // API routes with lazy initialization
+    this.app.use(async (req, res, next) => {
+      try {
+        await this.initialize();
+        next();
+      } catch (error) {
+        next(error);
+      }
+    });
+
     this.app.use("/api", routes);
 
     logger.info("🛣️  Routes configured successfully");
@@ -186,57 +206,67 @@ class Server {
       logger.error("Initial data seeding failed", {
         error: (error as Error).message,
       });
-      // Don't exit on seeding failure, server should still start
+      // Don't throw - seeding failure shouldn't prevent server from starting
     }
   }
 
   /**
-   * Start the server
+   * Start the server (for local development only)
    */
-  private startServer(): void {
-    const server = this.app.listen(this.port, this.host, () => {
-      logger.info(`🚀 Server running on http://${this.host}:${this.port}`);
-      logger.info(`📋 Environment: ${env.NODE_ENV}`);
-      logger.info(`📋 API Health: http://${this.host}:${this.port}/api/health`);
-      logger.info(`🔐 Admin Email: ${env.ADMIN_EMAIL}`);
+  public async start(): Promise<void> {
+    try {
+      // Initialize before starting
+      await this.initialize();
 
-      if (isDevelopment) {
-        logger.info(
-          `🔑 Demo Credentials: http://${this.host}:${this.port}/api/auth/credentials`
-        );
-      }
-    });
+      const server = this.app.listen(this.port, this.host, () => {
+        logger.info(`🚀 Server running on http://${this.host}:${this.port}`);
+        logger.info(`📋 Environment: ${env.NODE_ENV}`);
+        logger.info(`📋 API Health: http://${this.host}:${this.port}/api/health`);
+        logger.info(`🔐 Admin Email: ${env.ADMIN_EMAIL}`);
 
-    // Graceful shutdown
-    process.on("SIGTERM", () => {
-      logger.info("SIGTERM received, shutting down gracefully");
-      server.close(() => {
-        logger.info("Server closed");
-        process.exit(0);
+        if (isDevelopment) {
+          logger.info(
+            `🔑 Demo Credentials: http://${this.host}:${this.port}/api/auth/credentials`
+          );
+        }
       });
-    });
 
-    process.on("SIGINT", () => {
-      logger.info("SIGINT received, shutting down gracefully");
-      server.close(() => {
-        logger.info("Server closed");
-        process.exit(0);
+      // Graceful shutdown
+      process.on("SIGTERM", () => {
+        logger.info("SIGTERM received, shutting down gracefully");
+        server.close(() => {
+          logger.info("Server closed");
+          process.exit(0);
+        });
       });
-    });
 
-    // Handle uncaught exceptions
-    process.on("uncaughtException", (error) => {
-      logger.error("Uncaught Exception", {
-        error: error.message,
-        stack: error.stack,
+      process.on("SIGINT", () => {
+        logger.info("SIGINT received, shutting down gracefully");
+        server.close(() => {
+          logger.info("Server closed");
+          process.exit(0);
+        });
+      });
+
+      // Handle uncaught exceptions
+      process.on("uncaughtException", (error) => {
+        logger.error("Uncaught Exception", {
+          error: error.message,
+          stack: error.stack,
+        });
+        process.exit(1);
+      });
+
+      process.on("unhandledRejection", (reason, promise) => {
+        logger.error("Unhandled Rejection", { reason, promise });
+        process.exit(1);
+      });
+    } catch (error) {
+      logger.error("Failed to start server", {
+        error: (error as Error).message,
       });
       process.exit(1);
-    });
-
-    process.on("unhandledRejection", (reason, promise) => {
-      logger.error("Unhandled Rejection", { reason, promise });
-      process.exit(1);
-    });
+    }
   }
 
   /**
@@ -247,7 +277,16 @@ class Server {
   }
 }
 
-// Create and start server
+// Create server instance
 const server = new Server();
 
-export default server;
+// For Vercel serverless function - export the Express app directly
+export default server.getApp();
+
+// For local development - start the server if not in production
+if (isDevelopment || process.env.VERCEL !== "1") {
+  server.start().catch((error) => {
+    logger.error("Failed to start server", { error });
+    process.exit(1);
+  });
+}

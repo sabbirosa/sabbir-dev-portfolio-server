@@ -101,6 +101,24 @@ npm run lint
 npm run seed
 ```
 
+## 🌐 Deployment
+
+### Deploy to Vercel
+
+This project is configured for easy deployment to Vercel serverless functions.
+
+**Quick Deploy:**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone)
+
+For detailed deployment instructions, see [VERCEL_DEPLOYMENT.md](./docs/VERCEL_DEPLOYMENT.md).
+
+**Key Features for Serverless:**
+- ✅ Database connection caching
+- ✅ Lazy initialization for fast cold starts
+- ✅ Optimized middleware configuration
+- ✅ Environment-aware setup
+
 ## 📡 API Endpoints
 
 ### Authentication

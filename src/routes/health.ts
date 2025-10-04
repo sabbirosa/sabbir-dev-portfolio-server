@@ -1,5 +1,5 @@
-import { healthController } from "@/controllers/HealthController";
-import { asyncHandler } from "@/middleware/errorHandler";
+import { healthController } from "../controllers/HealthController";
+import { asyncHandler } from "../middleware/errorHandler";
 import { Router } from "express";
 
 const router = Router();

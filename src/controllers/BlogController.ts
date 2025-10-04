@@ -1,5 +1,5 @@
-import { BlogModel } from "@/models/Blog";
-import { logger } from "@/utils/logger";
+import { BlogModel } from "../models/Blog";
+import { logger } from "../utils/logger";
 import { Request, Response } from "express";
 
 /**

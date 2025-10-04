@@ -1,5 +1,5 @@
-import { env } from "@/config/environment";
-import { logger } from "@/utils/logger";
+import { env } from "../config/environment";
+import { logger } from "../utils/logger";
 import { NextFunction, Request, Response } from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";

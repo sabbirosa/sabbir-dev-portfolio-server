@@ -1,5 +1,5 @@
-import { ApiResponse } from "@/types";
-import { logger } from "@/utils/logger";
+import { ApiResponse } from "../types";
+import { logger } from "../utils/logger";
 import { Router } from "express";
 import authRoutes from "./auth";
 import blogRoutes from "./blog";

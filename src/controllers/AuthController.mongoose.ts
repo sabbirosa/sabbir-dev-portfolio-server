@@ -1,14 +1,14 @@
-import { UserModel } from "@/models/User.mongoose";
+import { UserModel } from "../models/User.mongoose";
 import {
   ApiResponse,
   AuthResponseDto,
   LoginDto,
   UnauthorizedError,
   ValidationError,
-} from "@/types";
-import { JWTService } from "@/utils/jwt";
-import { logger } from "@/utils/logger";
-import { loginSchema, validateInput } from "@/utils/validation";
+} from "../types";
+import { JWTService } from "../utils/jwt";
+import { logger } from "../utils/logger";
+import { loginSchema, validateInput } from "../utils/validation";
 import { Request, Response } from "express";
 
 export class AuthController {

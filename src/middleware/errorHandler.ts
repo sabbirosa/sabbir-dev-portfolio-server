@@ -1,6 +1,6 @@
-import { isDevelopment } from "@/config/environment";
-import { ApiResponse, AppError } from "@/types";
-import { logger } from "@/utils/logger";
+import { isDevelopment } from "../config/environment";
+import { ApiResponse, AppError } from "../types";
+import { logger } from "../utils/logger";
 import { NextFunction, Request, Response } from "express";
 
 /**

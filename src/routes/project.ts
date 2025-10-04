@@ -1,5 +1,5 @@
-import { projectController } from "@/controllers/ProjectController";
-import { authenticateToken, requireAdmin } from "@/middleware/auth";
+import { projectController } from "../controllers/ProjectController";
+import { authenticateToken, requireAdmin } from "../middleware/auth";
 import { Router } from "express";
 
 const router = Router();

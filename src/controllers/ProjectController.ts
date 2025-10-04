@@ -1,5 +1,5 @@
-import { ProjectModel } from "@/models/Project";
-import { logger } from "@/utils/logger";
+import { ProjectModel } from "../models/Project";
+import { logger } from "../utils/logger";
 import { Request, Response } from "express";
 
 /**

@@ -1,7 +1,7 @@
-import { env, isDevelopment } from "@/config/environment";
-import { userModel } from "@/models/User.adapter";
-import { ApiResponse } from "@/types";
-import { logger } from "@/utils/logger";
+import { env, isDevelopment } from "../config/environment";
+import { userModel } from "../models/User.adapter";
+import { ApiResponse } from "../types";
+import { logger } from "../utils/logger";
 import { Request, Response } from "express";
 
 export class HealthController {

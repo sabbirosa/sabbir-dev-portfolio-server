@@ -1,4 +1,4 @@
-import { CreateUserDto, User } from "@/types";
+import { CreateUserDto, User } from "../types";
 import { IUser, UserModel as MongooseUserModel } from "./User.mongoose";
 
 /**

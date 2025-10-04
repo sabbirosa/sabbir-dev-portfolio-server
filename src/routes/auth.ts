@@ -1,7 +1,7 @@
-import { authController } from "@/controllers/AuthController.mongoose";
-import { authenticateToken } from "@/middleware/auth";
-import { asyncHandler } from "@/middleware/errorHandler";
-import { authRateLimiter } from "@/middleware/security";
+import { authController } from "../controllers/AuthController.mongoose";
+import { authenticateToken } from "../middleware/auth";
+import { asyncHandler } from "../middleware/errorHandler";
+import { authRateLimiter } from "../middleware/security";
 import { Router } from "express";
 
 const router = Router();

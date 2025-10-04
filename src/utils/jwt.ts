@@ -1,6 +1,6 @@
-import { env } from "@/config/environment";
-import { User } from "@/types";
 import jwt from "jsonwebtoken";
+import { env } from "../config/environment";
+import { User } from "../types";
 
 export interface JWTPayload {
   id: string;

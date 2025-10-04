@@ -1,7 +1,7 @@
-import { userModel } from "@/models/User.adapter";
-import { ApiResponse, UnauthorizedError } from "@/types";
-import { JWTService } from "@/utils/jwt";
-import { logger } from "@/utils/logger";
+import { userModel } from "../models/User.adapter";
+import { ApiResponse, UnauthorizedError } from "../types";
+import { JWTService } from "../utils/jwt";
+import { logger } from "../utils/logger";
 import { NextFunction, Request, Response } from "express";
 
 // Extend Request interface to include user

@@ -1,4 +1,4 @@
-import { CreateUserDto, User } from "@/types";
+import { CreateUserDto, User } from "../types";
 import bcrypt from "bcryptjs";
 
 // In-memory storage for demo purposes

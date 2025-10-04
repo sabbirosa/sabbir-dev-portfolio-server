@@ -1,8 +1,8 @@
-import { env } from "@/config/environment";
-import { BlogModel } from "@/models/Blog";
-import { ProjectModel } from "@/models/Project";
-import { UserModel } from "@/models/User.mongoose";
-import { logger } from "@/utils/logger";
+import { env } from "../config/environment";
+import { BlogModel } from "../models/Blog";
+import { ProjectModel } from "../models/Project";
+import { UserModel } from "../models/User.mongoose";
+import { logger } from "../utils/logger";
 
 /**
  * Seed initial admin user

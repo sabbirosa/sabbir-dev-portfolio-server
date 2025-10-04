@@ -1,5 +1,5 @@
-import { CreateUserDto, LoginDto } from "../types";
 import Joi from "joi";
+import { CreateUserDto, LoginDto } from "../types";
 export declare const loginSchema: Joi.ObjectSchema<LoginDto>;
 export declare const createUserSchema: Joi.ObjectSchema<CreateUserDto>;
 export declare const createBlogSchema: Joi.ObjectSchema<any>;

@@ -1,7 +1,7 @@
-import { initializeDatabase } from "@/config/database";
-import { env } from "@/config/environment";
-import { userModel } from "@/models/User.adapter";
-import { logger } from "@/utils/logger";
+import { initializeDatabase } from "../config/database";
+import { env } from "../config/environment";
+import { userModel } from "../models/User.adapter";
+import { logger } from "../utils/logger";
 
 /**
  * Database seeding script

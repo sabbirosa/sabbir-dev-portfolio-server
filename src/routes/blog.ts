@@ -1,5 +1,5 @@
-import { blogController } from "@/controllers/BlogController";
-import { authenticateToken, requireAdmin } from "@/middleware/auth";
+import { blogController } from "../controllers/BlogController";
+import { authenticateToken, requireAdmin } from "../middleware/auth";
 import { Router } from "express";
 
 const router = Router();

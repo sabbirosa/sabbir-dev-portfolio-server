@@ -1,5 +1,5 @@
-import { CreateUserDto, LoginDto } from "@/types";
 import Joi from "joi";
+import { CreateUserDto, LoginDto } from "../types";
 
 // Validation schemas
 export const loginSchema = Joi.object<LoginDto>({

@@ -5,12 +5,11 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc && tsc-alias",
+    "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "seed": "tsx src/scripts/seed.ts",
-    "vercel-build": "tsc && tsc-alias"
+    "seed": "tsx src/scripts/seed.ts"
   },
   "keywords": [
     "express",

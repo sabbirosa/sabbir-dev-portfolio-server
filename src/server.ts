@@ -10,12 +10,15 @@ let server: Server;
 const startServer = async () => {
   try {
     // Connect to MongoDB
-    await mongoose.connect(env.MONGODB_URI || "mongodb://localhost:27017/portfolio", {
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-      maxPoolSize: 10,
-      minPoolSize: 2,
-    });
+    await mongoose.connect(
+      env.MONGODB_URI || "mongodb://localhost:27017/portfolio",
+      {
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+        maxPoolSize: 10,
+        minPoolSize: 2,
+      }
+    );
 
     console.log("🗄️  MongoDB connected successfully");
     logger.info("📦 Database initialized successfully");

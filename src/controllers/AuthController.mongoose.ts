@@ -47,11 +47,12 @@ export class AuthController {
 
       // Generate JWT token
       const tokenPayload = {
-        id: user._id.toString(),
+        id: (user._id as any).toString(),
         email: user.email,
-        role: user.role,
+        role: user.role as "admin",
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
+        password: user.password,
       };
 
       const token = JWTService.generateToken(tokenPayload);
@@ -60,15 +61,15 @@ export class AuthController {
       const authResponse: AuthResponseDto = {
         token,
         user: {
-          id: user._id.toString(),
+          id: (user._id as any).toString(),
           email: user.email,
-          role: user.role,
+          role: user.role as "admin",
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
         },
       };
 
-      logger.logAuth("LOGIN_SUCCESS", user._id.toString(), user.email);
+      logger.logAuth("LOGIN_SUCCESS", (user._id as any).toString(), user.email);
 
       const response: ApiResponse<AuthResponseDto> = {
         success: true,
@@ -190,9 +191,9 @@ export class AuthController {
         message: "Profile retrieved successfully",
         data: {
           user: {
-            id: fullUser._id.toString(),
+            id: (fullUser._id as any).toString(),
             email: fullUser.email,
-            role: fullUser.role,
+            role: fullUser.role as "admin",
             createdAt: fullUser.createdAt,
             updatedAt: fullUser.updatedAt,
           },

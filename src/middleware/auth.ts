@@ -1,4 +1,4 @@
-import { userModel } from "@/models/User";
+import { userModel } from "@/models/User.adapter";
 import { ApiResponse, UnauthorizedError } from "@/types";
 import { JWTService } from "@/utils/jwt";
 import { logger } from "@/utils/logger";

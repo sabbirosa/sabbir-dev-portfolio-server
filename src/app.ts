@@ -33,11 +33,23 @@ if (!isDevelopment) {
 app.use(compression());
 
 // CORS configuration
+const allowedOrigins = isDevelopment
+  ? ["http://localhost:3000", "http://127.0.0.1:3000"]
+  : env.FRONTEND_URL.split(",").map((url) => url.trim());
+
 app.use(
   cors({
-    origin: isDevelopment
-      ? ["http://localhost:3000", "http://127.0.0.1:3000"]
-      : [env.FRONTEND_URL],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or Postman)
+      if (!origin) return callback(null, true);
+
+      // Check if origin is allowed
+      if (allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Accept"],
@@ -77,7 +89,7 @@ app.use((req, res, next) => {
 app.get("/", (req: Request, res: Response) => {
   res.json({
     success: true,
-    message: "Sabbir Ahmed Portfolio API v2 is running",
+    message: "Sabbir Bin Abdul Latif Portfolio API v2 is running",
     timestamp: new Date().toISOString(),
     environment: env.NODE_ENV,
   });

@@ -1,6 +1,6 @@
 # Vercel Deployment Guide
 
-This guide will help you deploy the Sabbir Ahmed Portfolio v2 Server to Vercel.
+This guide will help you deploy the Sabbir Bin Abdul Latif Portfolio v2 Server to Vercel.
 
 ## 🚀 Quick Deploy
 
@@ -86,7 +86,7 @@ Once deployed, verify your API is working:
    ```json
    {
      "success": true,
-     "message": "Sabbir Ahmed Portfolio API v2 is running",
+     "message": "Sabbir Bin Abdul Latif Portfolio API v2 is running",
      "timestamp": "2024-10-04T...",
      "environment": "production"
    }

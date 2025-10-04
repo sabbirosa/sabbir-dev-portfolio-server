@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const logger_1 = require("../utils/logger");
 const express_1 = require("express");
+const logger_1 = require("../utils/logger");
 const auth_1 = __importDefault(require("./auth"));
 const blog_1 = __importDefault(require("./blog"));
 const health_1 = __importDefault(require("./health"));
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
     logger_1.logger.info("API root accessed");
     const response = {
         success: true,
-        message: "Sabbir Ahmed Portfolio API v2",
+        message: "Sabbir Bin Abdul Latif Portfolio API v2",
         data: {
             version: "2.0.0",
             description: "Express.js API with JWT authentication for portfolio management",

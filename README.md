@@ -1,4 +1,4 @@
-# Sabbir Ahmed Portfolio v2 - Server
+# Sabbir Bin Abdul Latif Portfolio v2 - Server
 
 A robust Express.js API server with JWT authentication, built with TypeScript and following MVC architecture patterns.
 
@@ -362,4 +362,4 @@ For support and questions:
 
 ---
 
-**Built with ❤️ by Sabbir Ahmed**
+**Built with ❤️ by Sabbir Bin Abdul Latif**

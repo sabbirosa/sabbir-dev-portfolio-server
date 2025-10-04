@@ -1,6 +1,6 @@
+import { Router } from "express";
 import { ApiResponse } from "../types";
 import { logger } from "../utils/logger";
-import { Router } from "express";
 import authRoutes from "./auth";
 import blogRoutes from "./blog";
 import healthRoutes from "./health";
@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
 
   const response: ApiResponse = {
     success: true,
-    message: "Sabbir Ahmed Portfolio API v2",
+    message: "Sabbir Bin Abdul Latif Portfolio API v2",
     data: {
       version: "2.0.0",
       description:

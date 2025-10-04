@@ -1,7 +1,7 @@
 {
   "name": "sabbir-dev-portfolio-v2-server",
   "version": "1.0.0",
-  "description": "Backend server for Sabbir Ahmed Portfolio v2 - Express.js API with JWT authentication",
+  "description": "Backend server for Sabbir Bin Abdul Latif Portfolio v2 - Express.js API with JWT authentication",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -18,7 +18,7 @@
     "portfolio",
     "api"
   ],
-  "author": "Sabbir Ahmed",
+  "author": "Sabbir Bin Abdul Latif",
   "license": "MIT",
   "dependencies": {
     "@types/mongoose": "^5.11.96",

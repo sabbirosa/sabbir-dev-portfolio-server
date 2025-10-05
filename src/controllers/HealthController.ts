@@ -26,7 +26,7 @@ export class HealthController {
           host: env.HOST,
         },
         database: {
-          type: "memory",
+          type: "mongodb",
           connected: true,
           userCount,
         },
@@ -138,7 +138,7 @@ export class HealthController {
       const userCount = await userModel.getUserCount();
       checks.database = {
         status: "ready",
-        type: "memory",
+        type: "mongodb",
         userCount,
       };
     } catch (error) {

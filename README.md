@@ -68,7 +68,7 @@ JWT_SECRET=your_super_secret_jwt_key_change_in_production
 JWT_EXPIRES_IN=7d
 
 # Admin User Configuration
-ADMIN_EMAIL=admin@sabbir.dev
+ADMIN_EMAIL=admin@sabbir.co
 ADMIN_PASSWORD=Admin123!
 
 # CORS Configuration
@@ -157,7 +157,7 @@ The API uses JWT (JSON Web Tokens) for authentication:
 curl -X POST http://localhost:3001/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "admin@sabbir.dev",
+    "email": "admin@sabbir.co",
     "password": "Admin123!"
   }'
 ```
@@ -172,7 +172,7 @@ curl -X POST http://localhost:3001/api/auth/login \
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
     "user": {
       "id": "user_123",
-      "email": "admin@sabbir.dev",
+      "email": "admin@sabbir.co",
       "role": "admin"
     }
   },
@@ -357,7 +357,7 @@ This project is licensed under the MIT License.
 
 For support and questions:
 
-- Email: admin@sabbir.dev
+- Email: admin@sabbir.co
 - GitHub Issues: [Create an issue](https://github.com/sabbir-ahmed/portfolio-v2-server/issues)
 
 ---

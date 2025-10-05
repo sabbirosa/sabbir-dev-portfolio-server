@@ -5,6 +5,7 @@ import authRoutes from "./auth";
 import blogRoutes from "./blog";
 import healthRoutes from "./health";
 import projectRoutes from "./project";
+import uploadRoutes from "./upload";
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.use("/auth", authRoutes);
 router.use("/health", healthRoutes);
 router.use("/blogs", blogRoutes);
 router.use("/projects", projectRoutes);
+router.use("/upload", uploadRoutes);
 
 // API root endpoint
 router.get("/", (req, res) => {
@@ -56,6 +58,10 @@ router.get("/", (req, res) => {
           create: "POST /api/projects (protected)",
           update: "PUT /api/projects/:id (protected)",
           delete: "DELETE /api/projects/:id (protected)",
+        },
+        upload: {
+          uploadImage: "POST /api/upload (protected)",
+          deleteImage: "DELETE /api/upload (protected)",
         },
       },
       documentation: "https://github.com/sabbir-ahmed/portfolio-v2-server",

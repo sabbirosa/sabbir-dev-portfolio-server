@@ -57,7 +57,20 @@ class BlogController {
     async createBlog(req, res) {
         try {
             const blogData = req.body;
-            if (!blogData.title || !blogData.description || !blogData.content) {
+            logger_1.logger.info("Creating blog with data", {
+                hasTitle: !!blogData.title,
+                hasDescription: !!blogData.description,
+                hasContent: !!blogData.content,
+                hasFeaturedImage: !!blogData.featuredImage,
+            });
+            if (!blogData.title?.trim() ||
+                !blogData.description?.trim() ||
+                !blogData.content?.trim()) {
+                logger_1.logger.warn("Blog creation failed - missing required fields", {
+                    title: blogData.title,
+                    description: blogData.description,
+                    contentLength: blogData.content?.length || 0,
+                });
                 res.status(400).json({
                     success: false,
                     message: "Title, description, and content are required",

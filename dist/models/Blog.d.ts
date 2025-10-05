@@ -3,6 +3,7 @@ export interface IBlog extends Document {
     title: string;
     description: string;
     content: string;
+    featuredImage?: string;
     date: Date;
     readTime: string;
     tags: string[];

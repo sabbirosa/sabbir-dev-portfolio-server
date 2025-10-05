@@ -11,6 +11,9 @@ const requiredEnvVars = [
     "ADMIN_EMAIL",
     "ADMIN_PASSWORD",
     "MONGODB_URI",
+    "CLOUDINARY_CLOUD_NAME",
+    "CLOUDINARY_API_KEY",
+    "CLOUDINARY_API_SECRET",
 ];
 const missingEnvVars = requiredEnvVars.filter((envVar) => !process.env[envVar]);
 if (missingEnvVars.length > 0) {
@@ -31,6 +34,9 @@ exports.env = {
     RATE_LIMIT_MAX: parseInt(process.env.RATE_LIMIT_MAX || "100", 10),
     RATE_LIMIT_WINDOW_MS: parseInt(process.env.RATE_LIMIT_WINDOW_MS || "900000", 10),
     LOG_LEVEL: process.env.LOG_LEVEL || "info",
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
 };
 exports.isDevelopment = exports.env.NODE_ENV === "development";
 exports.isProduction = exports.env.NODE_ENV === "production";

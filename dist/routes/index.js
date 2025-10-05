@@ -9,11 +9,13 @@ const auth_1 = __importDefault(require("./auth"));
 const blog_1 = __importDefault(require("./blog"));
 const health_1 = __importDefault(require("./health"));
 const project_1 = __importDefault(require("./project"));
+const upload_1 = __importDefault(require("./upload"));
 const router = (0, express_1.Router)();
 router.use("/auth", auth_1.default);
 router.use("/health", health_1.default);
 router.use("/blogs", blog_1.default);
 router.use("/projects", project_1.default);
+router.use("/upload", upload_1.default);
 router.get("/", (req, res) => {
     logger_1.logger.info("API root accessed");
     const response = {
@@ -48,6 +50,10 @@ router.get("/", (req, res) => {
                     create: "POST /api/projects (protected)",
                     update: "PUT /api/projects/:id (protected)",
                     delete: "DELETE /api/projects/:id (protected)",
+                },
+                upload: {
+                    uploadImage: "POST /api/upload (protected)",
+                    deleteImage: "DELETE /api/upload (protected)",
                 },
             },
             documentation: "https://github.com/sabbir-ahmed/portfolio-v2-server",

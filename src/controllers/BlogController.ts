@@ -1,6 +1,6 @@
+import { Request, Response } from "express";
 import { BlogModel } from "../models/Blog";
 import { logger } from "../utils/logger";
-import { Request, Response } from "express";
 
 /**
  * Blog Controller
@@ -80,8 +80,25 @@ export class BlogController {
     try {
       const blogData = req.body;
 
-      // Validate required fields
-      if (!blogData.title || !blogData.description || !blogData.content) {
+      // Log received data for debugging
+      logger.info("Creating blog with data", {
+        hasTitle: !!blogData.title,
+        hasDescription: !!blogData.description,
+        hasContent: !!blogData.content,
+        hasFeaturedImage: !!blogData.featuredImage,
+      });
+
+      // Validate required fields (trim to handle empty strings)
+      if (
+        !blogData.title?.trim() ||
+        !blogData.description?.trim() ||
+        !blogData.content?.trim()
+      ) {
+        logger.warn("Blog creation failed - missing required fields", {
+          title: blogData.title,
+          description: blogData.description,
+          contentLength: blogData.content?.length || 0,
+        });
         res.status(400).json({
           success: false,
           message: "Title, description, and content are required",

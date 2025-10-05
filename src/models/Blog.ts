@@ -5,6 +5,7 @@ export interface IBlog extends Document {
   title: string;
   description: string;
   content: string;
+  featuredImage?: string;
   date: Date;
   readTime: string;
   tags: string[];
@@ -31,6 +32,10 @@ const blogSchema = new Schema<IBlog>(
     content: {
       type: String,
       required: [true, "Content is required"],
+    },
+    featuredImage: {
+      type: String,
+      default: null,
     },
     date: {
       type: Date,

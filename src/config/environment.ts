@@ -16,6 +16,9 @@ export interface EnvironmentConfig {
   RATE_LIMIT_MAX: number;
   RATE_LIMIT_WINDOW_MS: number;
   LOG_LEVEL: string;
+  CLOUDINARY_CLOUD_NAME: string;
+  CLOUDINARY_API_KEY: string;
+  CLOUDINARY_API_SECRET: string;
 }
 
 // Validate required environment variables
@@ -24,6 +27,9 @@ const requiredEnvVars = [
   "ADMIN_EMAIL",
   "ADMIN_PASSWORD",
   "MONGODB_URI",
+  "CLOUDINARY_CLOUD_NAME",
+  "CLOUDINARY_API_KEY",
+  "CLOUDINARY_API_SECRET",
 ];
 
 const missingEnvVars = requiredEnvVars.filter((envVar) => !process.env[envVar]);
@@ -55,6 +61,9 @@ export const env: EnvironmentConfig = {
     10
   ),
   LOG_LEVEL: process.env.LOG_LEVEL || "info",
+  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME!,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY!,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET!,
 };
 
 export const isDevelopment = env.NODE_ENV === "development";

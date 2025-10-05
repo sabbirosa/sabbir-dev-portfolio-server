@@ -52,6 +52,10 @@ const blogSchema = new mongoose_1.Schema({
         type: String,
         required: [true, "Content is required"],
     },
+    featuredImage: {
+        type: String,
+        default: null,
+    },
     date: {
         type: Date,
         default: Date.now,

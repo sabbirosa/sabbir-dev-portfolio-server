@@ -11,6 +11,9 @@ export interface EnvironmentConfig {
     RATE_LIMIT_MAX: number;
     RATE_LIMIT_WINDOW_MS: number;
     LOG_LEVEL: string;
+    CLOUDINARY_CLOUD_NAME: string;
+    CLOUDINARY_API_KEY: string;
+    CLOUDINARY_API_SECRET: string;
 }
 export declare const env: EnvironmentConfig;
 export declare const isDevelopment: boolean;

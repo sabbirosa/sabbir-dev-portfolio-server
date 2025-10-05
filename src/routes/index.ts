@@ -3,6 +3,9 @@ import { ApiResponse } from "../types";
 import { logger } from "../utils/logger";
 import authRoutes from "./auth";
 import blogRoutes from "./blog";
+import educationRoutes from "./education";
+import experienceRoutes from "./experience";
+import extracurricularRoutes from "./extracurricular";
 import healthRoutes from "./health";
 import projectRoutes from "./project";
 import uploadRoutes from "./upload";
@@ -20,6 +23,9 @@ router.use("/health", healthRoutes);
 router.use("/blogs", blogRoutes);
 router.use("/projects", projectRoutes);
 router.use("/upload", uploadRoutes);
+router.use("/education", educationRoutes);
+router.use("/experience", experienceRoutes);
+router.use("/extracurricular", extracurricularRoutes);
 
 // API root endpoint
 router.get("/", (req, res) => {

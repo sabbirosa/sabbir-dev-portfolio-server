@@ -11,7 +11,7 @@ const User_adapter_1 = require("../models/User.adapter");
 const logger_1 = require("../utils/logger");
 async function seedDatabase() {
     try {
-        logger_1.logger.info("🌱 Starting database seeding...");
+        logger_1.logger.info("Starting database seeding...");
         await (0, database_1.initializeDatabase)();
         await seedAdminUser();
         logger_1.logger.info("✅ Database seeding completed successfully");
@@ -67,8 +67,8 @@ async function seedSampleBlogs() {
 }
 async function seedSampleProjects() {
     try {
-        logger_1.logger.info("🚀 Seeding sample projects...");
-        logger_1.logger.info("🚀 Sample projects seeded successfully");
+        logger_1.logger.info("Seeding sample projects...");
+        logger_1.logger.info("Sample projects seeded successfully");
     }
     catch (error) {
         logger_1.logger.error("Failed to seed sample projects", {

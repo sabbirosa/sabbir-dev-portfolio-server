@@ -21,17 +21,17 @@ src/
 
 ## ✨ Features
 
-- **🔐 JWT Authentication**: Secure token-based authentication
+- **JWT Authentication**: Secure token-based authentication
 - **🛡️ Security**: Helmet, rate limiting, CORS, request validation
 - **📝 Logging**: Comprehensive logging with different levels
 - **🗄️ Database Ready**: Extensible to use Prisma, MongoDB, or other databases
 - **⚡ Performance**: Compression, request timeouts, and optimization
 - **🧪 Error Handling**: Global error handling with proper HTTP status codes
-- **📋 Health Checks**: Kubernetes-ready health and readiness probes
+- **Health Checks**: Kubernetes-ready health and readiness probes
 - **🔄 Hot Reload**: Development server with auto-restart
 - **📊 Monitoring**: Request logging and performance metrics
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -295,7 +295,7 @@ export class YourModel {
 // Auth endpoints: 5 requests per 15 minutes
 ```
 
-## 📋 Health Monitoring
+## Health Monitoring
 
 ### Health Check Response
 
@@ -316,7 +316,7 @@ export class YourModel {
 }
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Production Checklist
 

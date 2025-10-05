@@ -7,6 +7,9 @@ const express_1 = require("express");
 const logger_1 = require("../utils/logger");
 const auth_1 = __importDefault(require("./auth"));
 const blog_1 = __importDefault(require("./blog"));
+const education_1 = __importDefault(require("./education"));
+const experience_1 = __importDefault(require("./experience"));
+const extracurricular_1 = __importDefault(require("./extracurricular"));
 const health_1 = __importDefault(require("./health"));
 const project_1 = __importDefault(require("./project"));
 const upload_1 = __importDefault(require("./upload"));
@@ -16,6 +19,9 @@ router.use("/health", health_1.default);
 router.use("/blogs", blog_1.default);
 router.use("/projects", project_1.default);
 router.use("/upload", upload_1.default);
+router.use("/education", education_1.default);
+router.use("/experience", experience_1.default);
+router.use("/extracurricular", extracurricular_1.default);
 router.get("/", (req, res) => {
     logger_1.logger.info("API root accessed");
     const response = {

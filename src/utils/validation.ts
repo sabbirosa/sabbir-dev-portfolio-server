@@ -4,10 +4,7 @@ import { CreateUserDto, LoginDto } from "../types";
 // Validation schemas
 export const loginSchema = Joi.object<LoginDto>({
   email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net", "org", "edu", "dev", "io"] },
-    })
+    .email({ minDomainSegments: 2, tlds: { allow: true } })
     .required()
     .messages({
       "string.email": "Please enter a valid email address",
@@ -21,10 +18,7 @@ export const loginSchema = Joi.object<LoginDto>({
 
 export const createUserSchema = Joi.object<CreateUserDto>({
   email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net", "org", "edu", "dev", "io"] },
-    })
+    .email({ minDomainSegments: 2, tlds: { allow: true } })
     .required()
     .messages({
       "string.email": "Please enter a valid email address",

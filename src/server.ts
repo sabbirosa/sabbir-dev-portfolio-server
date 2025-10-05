@@ -21,14 +21,19 @@ const startServer = async () => {
     );
 
     console.log("🗄️  MongoDB connected successfully");
-    logger.info("📦 Database initialized successfully");
+    logger.info("Database initialized successfully");
 
     // Seed initial data only in development
     if (isDevelopment) {
       try {
         const { seedAll } = await import("./scripts/seed.mongoose");
         await seedAll();
-        logger.info("🌱 Initial data seeded successfully");
+        logger.info("Initial data seeded successfully");
+
+        // Seed about data (education, experience, extracurricular)
+        const { seedAboutData } = await import("./scripts/seedAboutData");
+        await seedAboutData();
+        logger.info("About data seeded successfully");
       } catch (error) {
         logger.error("Initial data seeding failed", {
           error: (error as Error).message,
@@ -38,14 +43,14 @@ const startServer = async () => {
 
     // Start server
     server = app.listen(env.PORT, () => {
-      logger.info(`🚀 Server running on http://${env.HOST}:${env.PORT}`);
-      logger.info(`📋 Environment: ${env.NODE_ENV}`);
-      logger.info(`📋 API Health: http://${env.HOST}:${env.PORT}/api/health`);
-      logger.info(`🔐 Admin Email: ${env.ADMIN_EMAIL}`);
+      logger.info(`Server running on http://${env.HOST}:${env.PORT}`);
+      logger.info(`Environment: ${env.NODE_ENV}`);
+      logger.info(`API Health: http://${env.HOST}:${env.PORT}/api/health`);
+      logger.info(`Admin Email: ${env.ADMIN_EMAIL}`);
 
       if (isDevelopment) {
         logger.info(
-          `🔑 Demo Credentials: http://${env.HOST}:${env.PORT}/api/auth/credentials`
+          `Demo Credentials: http://${env.HOST}:${env.PORT}/api/auth/credentials`
         );
       }
     });

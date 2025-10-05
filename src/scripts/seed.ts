@@ -9,7 +9,7 @@ import { logger } from "../utils/logger";
  */
 async function seedDatabase(): Promise<void> {
   try {
-    logger.info("🌱 Starting database seeding...");
+    logger.info("Starting database seeding...");
 
     // Initialize database connection
     await initializeDatabase();
@@ -96,7 +96,7 @@ async function seedSampleBlogs(): Promise<void> {
  */
 async function seedSampleProjects(): Promise<void> {
   try {
-    logger.info("🚀 Seeding sample projects...");
+    logger.info("Seeding sample projects...");
 
     // This will be implemented when project functionality is added
     // const sampleProjects = [
@@ -110,7 +110,7 @@ async function seedSampleProjects(): Promise<void> {
     //   // More sample projects
     // ];
 
-    logger.info("🚀 Sample projects seeded successfully");
+    logger.info("Sample projects seeded successfully");
   } catch (error) {
     logger.error("Failed to seed sample projects", {
       error: (error as Error).message,

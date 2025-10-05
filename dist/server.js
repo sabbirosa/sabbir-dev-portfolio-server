@@ -50,12 +50,15 @@ const startServer = async () => {
             minPoolSize: 2,
         });
         console.log("🗄️  MongoDB connected successfully");
-        logger_1.logger.info("📦 Database initialized successfully");
+        logger_1.logger.info("Database initialized successfully");
         if (environment_1.isDevelopment) {
             try {
                 const { seedAll } = await Promise.resolve().then(() => __importStar(require("./scripts/seed.mongoose")));
                 await seedAll();
-                logger_1.logger.info("🌱 Initial data seeded successfully");
+                logger_1.logger.info("Initial data seeded successfully");
+                const { seedAboutData } = await Promise.resolve().then(() => __importStar(require("./scripts/seedAboutData")));
+                await seedAboutData();
+                logger_1.logger.info("About data seeded successfully");
             }
             catch (error) {
                 logger_1.logger.error("Initial data seeding failed", {
@@ -64,12 +67,12 @@ const startServer = async () => {
             }
         }
         server = app_1.default.listen(environment_1.env.PORT, () => {
-            logger_1.logger.info(`🚀 Server running on http://${environment_1.env.HOST}:${environment_1.env.PORT}`);
-            logger_1.logger.info(`📋 Environment: ${environment_1.env.NODE_ENV}`);
-            logger_1.logger.info(`📋 API Health: http://${environment_1.env.HOST}:${environment_1.env.PORT}/api/health`);
-            logger_1.logger.info(`🔐 Admin Email: ${environment_1.env.ADMIN_EMAIL}`);
+            logger_1.logger.info(`Server running on http://${environment_1.env.HOST}:${environment_1.env.PORT}`);
+            logger_1.logger.info(`Environment: ${environment_1.env.NODE_ENV}`);
+            logger_1.logger.info(`API Health: http://${environment_1.env.HOST}:${environment_1.env.PORT}/api/health`);
+            logger_1.logger.info(`Admin Email: ${environment_1.env.ADMIN_EMAIL}`);
             if (environment_1.isDevelopment) {
-                logger_1.logger.info(`🔑 Demo Credentials: http://${environment_1.env.HOST}:${environment_1.env.PORT}/api/auth/credentials`);
+                logger_1.logger.info(`Demo Credentials: http://${environment_1.env.HOST}:${environment_1.env.PORT}/api/auth/credentials`);
             }
         });
     }
